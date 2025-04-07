@@ -1,28 +1,38 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+
+import java.util.HashMap;
+
 
 public class taskList {
-	private ArrayList<String> task = new ArrayList<>();
-
-	public int taskListSize(){
-		return task.size();
+	private HashMap<String,String> task = new HashMap<>();
+	final String ACTIVE = "ACTIVE";
+	
+	public void printTasks(){
+		for(String tasks : task.keySet()){
+			String taskName = tasks;
+			String taskStatus = task.get(tasks);
+			System.out.println(taskName + ": " + taskStatus);
+		}
 	}
 	public void addTask(String taskToAdd){
-		task.add(taskToAdd);
+		task.put(taskToAdd,ACTIVE);
 	}
 
-	public void updateTask(String taskToUpdate, String updatedTask){
-		if(task.contains(taskToUpdate)){
-			int index = task.indexOf(taskToUpdate);
-			task.set(index,updatedTask);
+	public void updateTask(String taskToUpdate, String update){
+		if(task.containsKey(taskToUpdate)){
+			task.put(taskToUpdate,update);
+			
+		}else{
+			System.out.println(taskToUpdate + " does not exist!");
 		}
-		System.out.println(taskToUpdate + " does not exist!");
+		
 	}
 	
 	public void deleteTask(String taskToDelete){
-		if(task.contains(taskToDelete)){
+		if(task.containsKey(taskToDelete)){
 			task.remove(taskToDelete);
+		}else{
+			System.out.println(taskToDelete + " does not exist!");
 		}
-		System.out.println(taskToDelete + " does not exist!");
+		
 	}
 }
